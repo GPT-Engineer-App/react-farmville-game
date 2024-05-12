@@ -1,31 +1,15 @@
 import { useState, useEffect } from "react";
-import { Container, Button, VStack, Text, Box, Image, useToast } from "@chakra-ui/react";
+import { Container, Button, VStack, Text, Box, Image, useToast, SimpleGrid, Icon } from "@chakra-ui/react";
 import { FaSeedling, FaTint, FaDollarSign, FaHandHoldingWater } from "react-icons/fa";
 
 const Index = () => {
   const [money, setMoney] = useState(100);
   const [seeds, setSeeds] = useState(0);
   const [plants, setPlants] = useState(0);
-  const [isPlanted, setIsPlanted] = useState(false);
-  const [isWatered, setIsWatered] = useState(false);
-  const [isHarvested, setIsHarvested] = useState(false);
+  const [farmGrid, setFarmGrid] = useState(Array(100).fill({ state: "empty" }));
   const toast = useToast();
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (isPlanted && isWatered && !isHarvested) {
-        setIsHarvested(true);
-        toast({
-          title: "Plants are ready to harvest!",
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-      }
-    }, 10000); // 10 seconds for demo purposes
-
-    return () => clearInterval(interval);
-  }, [isPlanted, isWatered, isHarvested, toast]);
+  // Removed unused useEffect block
 
   const buySeeds = () => {
     if (money >= 10) {
@@ -49,10 +33,12 @@ const Index = () => {
     }
   };
 
-  const plantSeeds = () => {
-    if (seeds > 0 && !isPlanted) {
+  const plantSeeds = (index) => {
+    if (seeds > 0 && farmGrid[index].state === "empty") {
       setSeeds(seeds - 1);
-      setIsPlanted(true);
+      const newGrid = [...farmGrid];
+      newGrid[index] = { state: "seeded" };
+      setFarmGrid(newGrid);
       toast({
         title: "Seeds planted!",
         description: "Your seeds have been planted. Remember to water them!",
@@ -70,9 +56,11 @@ const Index = () => {
     }
   };
 
-  const waterPlants = () => {
-    if (isPlanted && !isWatered) {
-      setIsWatered(true);
+  const waterPlants = (index) => {
+    if (farmGrid[index].state === "seeded") {
+      const newGrid = [...farmGrid];
+      newGrid[index] = { state: "growing" };
+      setFarmGrid(newGrid);
       toast({
         title: "Plants watered!",
         description: "Your plants have been watered. Wait for them to grow!",
@@ -91,12 +79,12 @@ const Index = () => {
     }
   };
 
-  const harvestPlants = () => {
-    if (isHarvested) {
+  const harvestPlants = (index) => {
+    if (farmGrid[index].state === "mature") {
+      const newGrid = [...farmGrid];
+      newGrid[index] = { state: "empty" };
+      setFarmGrid(newGrid);
       setPlants(plants + 1);
-      setIsPlanted(false);
-      setIsWatered(false);
-      setIsHarvested(false);
       toast({
         title: "Plants harvested!",
         description: "You have harvested your plants. You can sell them now!",
@@ -160,8 +148,16 @@ const Index = () => {
             Sell Plants
           </Button>
         </Box>
-        {isPlanted && !isHarvested && <Image src="https://images.unsplash.com/photo-1457530378978-8bac673b8062?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxncm93aW5nJTIwcGxhbnRzfGVufDB8fHx8MTcxNTUyOTM2MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Growing Plants" boxSize="200px" />}
-        {isHarvested && <Image src="https://images.unsplash.com/photo-1700737503382-0877e9b441f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxoYXJ2ZXN0ZWQlMjBwbGFudHN8ZW58MHx8fHwxNzE1NTI5MzYwfDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Harvested Plants" boxSize="200px" />}
+        <SimpleGrid columns={10} spacing={2}>
+          {farmGrid.map((cell, index) => (
+            <Box key={index} p={5} borderWidth="1px" borderRadius="lg">
+              {cell.state === "empty" && <Text>Empty</Text>}
+              {cell.state === "seeded" && <Icon as={FaSeedling} />}
+              {cell.state === "growing" && <Icon as={FaSeedling} />}
+              {cell.state === "mature" && <Image src="https://images.unsplash.com/photo-1700737503382-0877e9b441f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxoYXJ2ZXN0ZWQlMjBwbGFudHN8ZW58MHx8fHwxNzE1NTI5MzYwfDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Harvested Plants" boxSize="50px" />}
+            </Box>
+          ))}
+        </SimpleGrid>
       </VStack>
     </Container>
   );
