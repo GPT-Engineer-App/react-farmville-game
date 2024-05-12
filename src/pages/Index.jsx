@@ -162,13 +162,13 @@ const Index = () => {
       </Box>
       <HStack spacing={4} justifyContent="flex-end">
         <Button colorScheme="green" onClick={() => setMode("planting")} bg={mode === "planting" ? "green.500" : "green.200"}>
-          Planting
+          Plant
         </Button>
         <Button colorScheme="blue" onClick={() => setMode("watering")} bg={mode === "watering" ? "blue.500" : "blue.200"}>
-          Watering
+          Water
         </Button>
         <Button colorScheme="orange" onClick={() => setMode("harvesting")} bg={mode === "harvesting" ? "orange.500" : "orange.200"}>
-          Harvesting
+          Harvest
         </Button>
       </HStack>
 
@@ -176,10 +176,10 @@ const Index = () => {
         <Box flex="1">
           <Image src={`images/${mode}.png`} alt={`${mode} mode`} boxSize="100%" />
         </Box>
-        <SimpleGrid columns={10} spacing={1} templateColumns="repeat(10, 1fr)" minChildWidth="20px" flex="1">
+        <SimpleGrid columns={10} spacing={1} templateColumns="repeat(10, 1fr)" minChildWidth="20px" flex="2">
           {farmGrid.map((cell, index) => (
             <Box key={index} p={2} borderWidth="1px" borderRadius="lg" onClick={() => handleGridClick(index)}>
-              {cell.state === "empty" && <Box bg="brown" p={2} borderWidth="1px" borderRadius="lg" />}
+              {cell.state === "empty" && <Box bg="#8B4513" p={2} borderWidth="1px" borderRadius="lg" />}
               {cell.state === "seeded" && <Box bg="lightgreen" p={2} borderWidth="1px" borderRadius="lg" />}
               {cell.state === "growing" && <Box bg="green" p={2} borderWidth="1px" borderRadius="lg" />}
               {cell.state === "mature" && <Image src="https://images.unsplash.com/photo-1700737503382-0877e9b441f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxoYXJ2ZXN0ZWQlMjBwbGFudHN8ZW58MHx8fHwxNzE1NTI5MzYwfDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Harvested Plants" boxSize="30px" />}
