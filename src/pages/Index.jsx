@@ -168,7 +168,7 @@ const Index = () => {
           </Text>
         </HStack>
       </Box>
-      <VStack align="start" spacing={4}>
+      <HStack spacing={4}>
         <Button colorScheme="green" onClick={() => setMode("planting")} bg={mode === "planting" ? "green.500" : "green.200"}>
           Plant
         </Button>
@@ -178,7 +178,7 @@ const Index = () => {
         <Button colorScheme="orange" onClick={() => setMode("harvesting")} bg={mode === "harvesting" ? "orange.500" : "orange.200"}>
           Harvest
         </Button>
-      </VStack>
+      </HStack>
 
       <HStack spacing={4}>
         <Box flex="1">
