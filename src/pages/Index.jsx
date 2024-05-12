@@ -78,6 +78,7 @@ const Index = () => {
           newGrid[index] = { state: "empty" };
           setFarmGrid(newGrid);
           setPlants(plants + 1);
+          console.log(`Harvested plant at index ${index}. Total plants: ${plants + 1}`);
           toast({
             title: "Plant harvested!",
             description: "Your plant has been harvested. The plot is now empty and ready for new seeds!",
