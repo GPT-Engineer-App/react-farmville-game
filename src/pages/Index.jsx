@@ -178,6 +178,9 @@ const Index = () => {
             Harvesting Mode
           </Button>
         </Box>
+        <Text fontSize="lg" mt={4}>
+          Current Mode: {mode}
+        </Text>
         <SimpleGrid columns={10} spacing={2}>
           {farmGrid.map((cell, index) => (
             <Box key={index} p={5} borderWidth="1px" borderRadius="lg" onClick={() => handleGridClick(index)}>
