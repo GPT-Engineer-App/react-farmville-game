@@ -181,18 +181,18 @@ const Index = () => {
           </Button>
         </HStack>
         <HStack spacing={4}>
-          <Button isDisabled colorScheme="green" bg="lightgreen">
+          <Box bg="gray.200" p={2} borderRadius="md">
             Seeds{" "}
             <Badge ml={1} colorScheme="green">
               {seeds}
             </Badge>
-          </Button>
-          <Button isDisabled colorScheme="green" bg="darkgreen">
+          </Box>
+          <Box bg="gray.300" p={2} borderRadius="md">
             Plants{" "}
             <Badge ml={1} colorScheme="green">
               {plants}
             </Badge>
-          </Button>
+          </Box>
         </HStack>
       </HStack>
 
