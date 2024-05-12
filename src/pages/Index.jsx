@@ -195,7 +195,7 @@ const Index = () => {
 
       <HStack spacing={4}>
         <Box flex="1">
-          <Image src={`images/${mode}.png`} alt={`${mode} mode`} boxSize="100%" />
+          <Image src={mode === "planting" ? "/planting.png" : mode === "watering" ? "/watering.png" : "/harvesting.png"} alt={`${mode} mode`} boxSize="100%" />
         </Box>
         <SimpleGrid columns={10} spacing={1} templateColumns="repeat(10, 1fr)" minChildWidth="20px" flex="2">
           {farmGrid.map((cell, index) => (
