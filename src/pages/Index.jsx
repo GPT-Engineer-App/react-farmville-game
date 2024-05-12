@@ -153,7 +153,7 @@ const Index = () => {
   };
 
   return (
-    <VStack spacing={4} align="stretch">
+    <VStack spacing={4} align="stretch" p={4}>
       <Box p={4} bg="blue.500" color="white" display="flex" justifyContent="space-between">
         <Text fontSize="3xl">Saverville Farm</Text>
         <HStack spacing={4}>
