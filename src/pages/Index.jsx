@@ -156,11 +156,19 @@ const Index = () => {
     <VStack spacing={4} align="stretch">
       <Box p={4} bg="blue.500" color="white" display="flex" justifyContent="space-between">
         <Text fontSize="3xl">Saverville Farm</Text>
-        <Text fontSize="xl" textAlign="right">
-          Wallet: ${money}
-        </Text>
+        <HStack spacing={4}>
+          <Button colorScheme="yellow" onClick={buySeeds}>
+            Buy Seeds
+          </Button>
+          <Button colorScheme="red" onClick={sellPlants}>
+            Sell Plants
+          </Button>
+          <Text fontSize="xl" textAlign="right">
+            Wallet: ${money}
+          </Text>
+        </HStack>
       </Box>
-      <HStack spacing={4} justifyContent="flex-end">
+      <VStack align="start" spacing={4}>
         <Button colorScheme="green" onClick={() => setMode("planting")} bg={mode === "planting" ? "green.500" : "green.200"}>
           Plant
         </Button>
@@ -170,7 +178,7 @@ const Index = () => {
         <Button colorScheme="orange" onClick={() => setMode("harvesting")} bg={mode === "harvesting" ? "orange.500" : "orange.200"}>
           Harvest
         </Button>
-      </HStack>
+      </VStack>
 
       <HStack spacing={4}>
         <Box flex="1">
