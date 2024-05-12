@@ -155,28 +155,22 @@ const Index = () => {
   return (
     <VStack spacing={4} align="stretch">
       <Box p={4} bg="blue.500" color="white" display="flex" justifyContent="space-between">
-        <Text fontSize="xl">Wallet: ${money}</Text>
-        <Text fontSize="3xl" textAlign="right">
-          Saverville Farm
+        <Text fontSize="3xl">Saverville Farm</Text>
+        <Text fontSize="xl" textAlign="right">
+          Wallet: ${money}
         </Text>
-        <HStack spacing={4}>
-          <Button colorScheme="green" onClick={() => setMode("planting")} bg={mode === "planting" ? "green.500" : "green.200"}>
-            Planting
-          </Button>
-          <Button colorScheme="blue" onClick={() => setMode("watering")} bg={mode === "watering" ? "blue.500" : "blue.200"}>
-            Watering
-          </Button>
-          <Button colorScheme="orange" onClick={() => setMode("harvesting")} bg={mode === "harvesting" ? "orange.500" : "orange.200"}>
-            Harvesting
-          </Button>
-          <Button leftIcon={<FaSeedling />} colorScheme="green" onClick={buySeeds}>
-            Buy Seeds ($10)
-          </Button>
-          <Button leftIcon={<FaDollarSign />} colorScheme="orange" onClick={sellPlants}>
-            Sell Plants
-          </Button>
-        </HStack>
       </Box>
+      <HStack spacing={4} justifyContent="flex-end">
+        <Button colorScheme="green" onClick={() => setMode("planting")} bg={mode === "planting" ? "green.500" : "green.200"}>
+          Planting
+        </Button>
+        <Button colorScheme="blue" onClick={() => setMode("watering")} bg={mode === "watering" ? "blue.500" : "blue.200"}>
+          Watering
+        </Button>
+        <Button colorScheme="orange" onClick={() => setMode("harvesting")} bg={mode === "harvesting" ? "orange.500" : "orange.200"}>
+          Harvesting
+        </Button>
+      </HStack>
 
       <HStack spacing={4}>
         <Box flex="1">
