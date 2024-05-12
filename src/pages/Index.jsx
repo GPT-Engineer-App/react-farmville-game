@@ -154,28 +154,34 @@ const Index = () => {
 
   return (
     <VStack spacing={4} align="stretch">
-      <Box p={4} bg="blue.500" color="white">
-        <Text fontSize="3xl" textAlign="center">
+      <HStack justifyContent="space-between" p={4}>
+        <HStack>
+          <Button colorScheme="green" onClick={() => setMode("planting")} bg={mode === "planting" ? "green.500" : "green.200"}>
+            Planting
+          </Button>
+          <Button colorScheme="blue" onClick={() => setMode("watering")} bg={mode === "watering" ? "blue.500" : "blue.200"}>
+            Watering
+          </Button>
+          <Button colorScheme="orange" onClick={() => setMode("harvesting")} bg={mode === "harvesting" ? "orange.500" : "orange.200"}>
+            Harvesting
+          </Button>
+        </HStack>
+        <HStack>
+          <Button leftIcon={<FaSeedling />} colorScheme="green" onClick={buySeeds}>
+            Buy Seeds ($10)
+          </Button>
+          <Button leftIcon={<FaDollarSign />} colorScheme="orange" onClick={sellPlants}>
+            Sell Plants
+          </Button>
+        </HStack>
+      </HStack>
+      <Box p={4} bg="blue.500" color="white" display="flex" justifyContent="space-between">
+        <Text fontSize="xl">Wallet: ${money}</Text>
+        <Text fontSize="3xl" textAlign="right">
           Saverville Farm
         </Text>
       </Box>
-      <HStack justifyContent="space-around" p={4}>
-        <Button colorScheme="green" onClick={() => setMode("planting")} bg={mode === "planting" ? "green.500" : "green.200"}>
-          Planting
-        </Button>
-        <Button colorScheme="blue" onClick={() => setMode("watering")} bg={mode === "watering" ? "blue.500" : "blue.200"}>
-          Watering
-        </Button>
-        <Button colorScheme="orange" onClick={() => setMode("harvesting")} bg={mode === "harvesting" ? "orange.500" : "orange.200"}>
-          Harvesting
-        </Button>
-        <Button leftIcon={<FaSeedling />} colorScheme="green" onClick={buySeeds}>
-          Buy Seeds ($10)
-        </Button>
-        <Button leftIcon={<FaDollarSign />} colorScheme="orange" onClick={sellPlants}>
-          Sell Plants
-        </Button>
-      </HStack>
+        
       <HStack spacing={4}>
         <Box flex="1">
           <Image src={`images/${mode}.png`} alt={`${mode} mode`} boxSize="100%" />
@@ -183,7 +189,7 @@ const Index = () => {
         <SimpleGrid columns={8} spacing={2} flex="3">
           {farmGrid.map((cell, index) => (
             <Box key={index} p={5} borderWidth="1px" borderRadius="lg" onClick={() => handleGridClick(index)}>
-              {cell.state === "empty" && <Text>Empty</Text>}
+              {cell.state === "empty" && <Box bg="brown" p={5} borderWidth="1px" borderRadius="lg" />}
               {cell.state === "seeded" && <Box bg="lightgreen" p={5} borderWidth="1px" borderRadius="lg" />}
               {cell.state === "growing" && <Box bg="green" p={5} borderWidth="1px" borderRadius="lg" />}
               {cell.state === "mature" && <Image src="https://images.unsplash.com/photo-1700737503382-0877e9b441f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxoYXJ2ZXN0ZWQlMjBwbGFudHN8ZW58MHx8fHwxNzE1NTI5MzYwfDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Harvested Plants" boxSize="50px" />}
