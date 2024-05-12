@@ -73,7 +73,7 @@ const Index = () => {
         }
         break;
       case "harvesting":
-        if (farmGrid[index].state === "mature") {
+        if (farmGrid[index].state === "mature" || farmGrid[index].state === "growing") {
           const newGrid = [...farmGrid];
           newGrid[index] = { state: "empty" };
           setFarmGrid(newGrid);
