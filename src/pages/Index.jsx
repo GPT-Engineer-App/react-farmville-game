@@ -74,12 +74,12 @@ const Index = () => {
         break;
       case "harvesting":
         if (farmGrid[index].state === "mature") {
-          const newGrid = farmGrid.map((cell, idx) => {
-            if (idx === index && cell.state === "mature") {
-              return { state: "empty" };
-            }
-            return cell;
-          });
+          const newGrid = [...farmGrid];
+          newGrid[index] = { state: "harvested" };
+          setTimeout(() => {
+            newGrid[index] = { state: "empty" };
+            setFarmGrid(newGrid);
+          }, 500);
           setFarmGrid(newGrid);
           setPlants(plants + 1);
           toast({
