@@ -154,7 +154,7 @@ const Index = () => {
 
   return (
     <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <Box w="full" p={4} bg="blue.500" color="white">
+      <Box w="full" p={4} bg="blue.500" color="white" boxShadow="md">
         <Text fontSize="3xl" textAlign="center">
           Saverville Farm
         </Text>
@@ -162,14 +162,14 @@ const Index = () => {
       <VStack spacing={4} w="full">
         <HStack justifyContent="space-between" w="full" p={4}>
           <VStack align="start">
-            <Button colorScheme="green" onClick={() => setMode("planting")}>
-              Planting Mode
+            <Button colorScheme="green" onClick={() => setMode("planting")} bg={mode === "planting" ? "green.500" : "green.200"}>
+              Planting
             </Button>
-            <Button colorScheme="blue" onClick={() => setMode("watering")} ml={2}>
-              Watering Mode
+            <Button colorScheme="blue" onClick={() => setMode("watering")} ml={2} bg={mode === "watering" ? "blue.500" : "blue.200"}>
+              Watering
             </Button>
-            <Button colorScheme="orange" onClick={() => setMode("harvesting")} ml={2}>
-              Harvesting Mode
+            <Button colorScheme="orange" onClick={() => setMode("harvesting")} ml={2} bg={mode === "harvesting" ? "orange.500" : "orange.200"}>
+              Harvesting
             </Button>
           </VStack>
           <VStack align="end">
@@ -181,10 +181,10 @@ const Index = () => {
             </Button>
           </VStack>
         </HStack>
-        <Text fontSize="lg" mt={4}>
-          Current Mode: {mode}
-        </Text>
-        <SimpleGrid columns={10} spacing={2}>
+        <Box w="2/12">
+          <Image src={`images/${mode}.png`} alt={`${mode} mode`} boxSize="100%" />
+        </Box>
+        <SimpleGrid columns={8} spacing={2} w="8/12">
           {farmGrid.map((cell, index) => (
             <Box key={index} p={5} borderWidth="1px" borderRadius="lg" onClick={() => handleGridClick(index)}>
               {cell.state === "empty" && <Text>Empty</Text>}
