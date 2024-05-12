@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Button, VStack, Text, Box, Image, useToast, SimpleGrid, Icon, HStack } from "@chakra-ui/react";
+import { Container, Button, VStack, Text, Box, Image, useToast, SimpleGrid, Icon, HStack, Badge } from "@chakra-ui/react";
 import { FaSeedling, FaTint, FaDollarSign, FaHandHoldingWater } from "react-icons/fa";
 
 const Index = () => {
@@ -181,8 +181,18 @@ const Index = () => {
           </Button>
         </HStack>
         <HStack spacing={4}>
-          <Text fontSize="md">Seeds: {seeds}</Text>
-          <Text fontSize="md">Plants: {plants}</Text>
+          <Button isDisabled colorScheme="green" bg="lightgreen">
+            Seeds{" "}
+            <Badge ml={1} colorScheme="green">
+              {seeds}
+            </Badge>
+          </Button>
+          <Button isDisabled colorScheme="green" bg="darkgreen">
+            Plants{" "}
+            <Badge ml={1} colorScheme="green">
+              {plants}
+            </Badge>
+          </Button>
         </HStack>
       </HStack>
 
