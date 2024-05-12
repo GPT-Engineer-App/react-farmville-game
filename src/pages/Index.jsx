@@ -77,7 +77,7 @@ const Index = () => {
           const newGrid = [...farmGrid];
           newGrid[index] = { state: "empty" };
           setFarmGrid(newGrid);
-          setPlants(plants + 1);
+          setPlants((prevPlants) => prevPlants + 1);
           console.log(`Harvested plant at index ${index}. Total plants: ${plants + 1}`);
           toast({
             title: "Plant harvested!",
@@ -113,7 +113,7 @@ const Index = () => {
   const harvestPlants = () => {
     const newGrid = farmGrid.map((cell, index) => {
       if (cell.state === "mature") {
-        setPlants(plants + 1);
+        setPlants((prevPlants) => prevPlants + 1);
         return { ...cell, state: "empty" };
       }
       return cell;
