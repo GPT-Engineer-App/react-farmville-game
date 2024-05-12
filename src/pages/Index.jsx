@@ -56,27 +56,21 @@ const Index = () => {
     }
   };
 
-  const waterPlants = (index) => {
-    if (farmGrid[index].state === "seeded") {
-      const newGrid = [...farmGrid];
-      newGrid[index] = { state: "growing" };
-      setFarmGrid(newGrid);
-      toast({
-        title: "Plants watered!",
-        description: "Your plants have been watered. Wait for them to grow!",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-      });
-    } else {
-      toast({
-        title: "Cannot water now!",
-        description: "You need to plant seeds first or they are already watered.",
-        status: "error",
-        duration: 2000,
-        isClosable: true,
-      });
-    }
+  const waterPlants = () => {
+    const newGrid = farmGrid.map((cell) => {
+      if (cell.state === "seeded") {
+        return { ...cell, state: "growing" };
+      }
+      return cell;
+    });
+    setFarmGrid(newGrid);
+    toast({
+      title: "Plants watered!",
+      description: "All seeded plants have been watered. Wait for them to grow!",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
   };
 
   const harvestPlants = (index) => {
