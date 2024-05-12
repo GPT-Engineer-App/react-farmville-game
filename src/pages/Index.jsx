@@ -80,7 +80,7 @@ const Index = () => {
           setPlants(plants + 1);
           toast({
             title: "Plant harvested!",
-            description: "Your plant has been harvested and the plot is ready for new seeds!",
+            description: "Your plant has been harvested. The plot is now empty and ready for new seeds!",
             status: "success",
             duration: 2000,
             isClosable: true,
