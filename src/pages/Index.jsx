@@ -75,12 +75,16 @@ const Index = () => {
       case "harvesting":
         if (farmGrid[index].state === "mature") {
           const newGrid = [...farmGrid];
-          newGrid[index] = { state: "empty" };
+          newGrid[index] = { state: "harvested" };
+          setTimeout(() => {
+            newGrid[index] = { state: "empty" };
+            setFarmGrid(newGrid);
+          }, 500);
           setFarmGrid(newGrid);
           setPlants(plants + 1);
           toast({
             title: "Plant harvested!",
-            description: "Your plant has been harvested and the plot is ready for new seeds!",
+            description: "Your plant has been harvested!",
             status: "success",
             duration: 2000,
             isClosable: true,
