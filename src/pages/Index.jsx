@@ -168,16 +168,22 @@ const Index = () => {
           </Text>
         </HStack>
       </Box>
-      <HStack spacing={4}>
-        <Button colorScheme="green" onClick={() => setMode("planting")} bg={mode === "planting" ? "green.500" : "green.200"}>
-          Plant
-        </Button>
-        <Button colorScheme="blue" onClick={() => setMode("watering")} bg={mode === "watering" ? "blue.500" : "blue.200"}>
-          Water
-        </Button>
-        <Button colorScheme="orange" onClick={() => setMode("harvesting")} bg={mode === "harvesting" ? "orange.500" : "orange.200"}>
-          Harvest
-        </Button>
+      <HStack justifyContent="space-between">
+        <HStack spacing={4}>
+          <Button colorScheme="green" onClick={() => setMode("planting")} bg={mode === "planting" ? "green.500" : "green.200"}>
+            Plant
+          </Button>
+          <Button colorScheme="blue" onClick={() => setMode("watering")} bg={mode === "watering" ? "blue.500" : "blue.200"}>
+            Water
+          </Button>
+          <Button colorScheme="orange" onClick={() => setMode("harvesting")} bg={mode === "harvesting" ? "orange.500" : "orange.200"}>
+            Harvest
+          </Button>
+        </HStack>
+        <HStack spacing={4}>
+          <Text fontSize="md">Seeds: {seeds}</Text>
+          <Text fontSize="md">Plants: {plants}</Text>
+        </HStack>
       </HStack>
 
       <HStack spacing={4}>
