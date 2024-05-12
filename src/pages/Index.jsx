@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Button, VStack, Text, Box, Image, useToast, SimpleGrid, Icon, HStack, Badge } from "@chakra-ui/react";
+import { Container, Button, VStack, Text, Box, Image, useToast, SimpleGrid, Icon, HStack } from "@chakra-ui/react";
 import { FaSeedling, FaTint, FaDollarSign, FaHandHoldingWater } from "react-icons/fa";
 
 const Index = () => {
@@ -180,28 +180,10 @@ const Index = () => {
         </Button>
       </HStack>
 
-      <VStack spacing={4}>
+      <HStack spacing={4}>
         <Box flex="1">
           <Image src={`images/${mode}.png`} alt={`${mode} mode`} boxSize="100%" />
         </Box>
-        <SimpleGrid columns={5} spacing={1} templateColumns="repeat(5, 1fr)" minChildWidth="20px">
-          <Box borderWidth="1px" borderRadius="lg" p={2} position="relative">
-            <Icon as={FaSeedling} />
-            {seeds > 1 && (
-              <Badge position="absolute" top="-1" right="-1" colorScheme="green">
-                {seeds}
-              </Badge>
-            )}
-          </Box>
-          <Box borderWidth="1px" borderRadius="lg" p={2} position="relative">
-            <Icon as={FaHandHoldingWater} />
-            {plants > 1 && (
-              <Badge position="absolute" top="-1" right="-1" colorScheme="orange">
-                {plants}
-              </Badge>
-            )}
-          </Box>
-        </SimpleGrid>
         <SimpleGrid columns={10} spacing={1} templateColumns="repeat(10, 1fr)" minChildWidth="20px" flex="2">
           {farmGrid.map((cell, index) => (
             <Box key={index} p={2} borderWidth="1px" borderRadius="lg" onClick={() => handleGridClick(index)}>
@@ -212,7 +194,7 @@ const Index = () => {
             </Box>
           ))}
         </SimpleGrid>
-      </VStack>
+      </HStack>
     </VStack>
   );
 };
