@@ -62,6 +62,11 @@ const Index = () => {
         if (farmGrid[index].state === "seeded") {
           const newGrid = [...farmGrid];
           newGrid[index] = { ...farmGrid[index], state: "growing" };
+          setTimeout(() => {
+            const updatedGrid = [...farmGrid];
+            updatedGrid[index] = { ...updatedGrid[index], state: "darkgreen" };
+            setFarmGrid(updatedGrid);
+          }, 3000);
           setFarmGrid(newGrid);
           toast({
             title: "Plant watered!",
