@@ -159,7 +159,9 @@ const Index = () => {
         <Text fontSize="3xl" textAlign="right">
           Saverville Farm
         </Text>
-        <HStack spacing={4}>
+      </Box>
+      <HStack justifyContent="space-between" p={4}>
+        <HStack>
           <Button colorScheme="green" onClick={() => setMode("planting")} bg={mode === "planting" ? "green.500" : "green.200"}>
             Planting
           </Button>
@@ -169,6 +171,8 @@ const Index = () => {
           <Button colorScheme="orange" onClick={() => setMode("harvesting")} bg={mode === "harvesting" ? "orange.500" : "orange.200"}>
             Harvesting
           </Button>
+        </HStack>
+        <HStack>
           <Button leftIcon={<FaSeedling />} colorScheme="green" onClick={buySeeds}>
             Buy Seeds ($10)
           </Button>
@@ -176,13 +180,19 @@ const Index = () => {
             Sell Plants
           </Button>
         </HStack>
+      </HStack>
+      <Box p={4} bg="blue.500" color="white" display="flex" justifyContent="space-between">
+        <Text fontSize="xl">Wallet: ${money}</Text>
+        <Text fontSize="3xl" textAlign="right">
+          Saverville Farm
+        </Text>
       </Box>
 
       <HStack spacing={4}>
         <Box flex="1">
           <Image src={`images/${mode}.png`} alt={`${mode} mode`} boxSize="100%" />
         </Box>
-        <SimpleGrid columns={10} spacing={1} templateColumns="repeat(10, 1fr)" minChildWidth="20px" flex="1">
+        <SimpleGrid columns={10} spacing={1} flex="3">
           {farmGrid.map((cell, index) => (
             <Box key={index} p={2} borderWidth="1px" borderRadius="lg" onClick={() => handleGridClick(index)}>
               {cell.state === "empty" && <Box bg="brown" p={2} borderWidth="1px" borderRadius="lg" />}
