@@ -73,28 +73,22 @@ const Index = () => {
     });
   };
 
-  const harvestPlants = (index) => {
-    if (farmGrid[index].state === "mature") {
-      const newGrid = [...farmGrid];
-      newGrid[index] = { state: "empty" };
-      setFarmGrid(newGrid);
-      setPlants(plants + 1);
-      toast({
-        title: "Plants harvested!",
-        description: "You have harvested your plants. You can sell them now!",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-      });
-    } else {
-      toast({
-        title: "Not ready to harvest!",
-        description: "Your plants are not ready to harvest yet.",
-        status: "error",
-        duration: 2000,
-        isClosable: true,
-      });
-    }
+  const harvestPlants = () => {
+    const newGrid = farmGrid.map((cell, index) => {
+      if (cell.state === "mature") {
+        setPlants(plants + 1);
+        return { ...cell, state: "empty" };
+      }
+      return cell;
+    });
+    setFarmGrid(newGrid);
+    toast({
+      title: "Plants harvested!",
+      description: "You have harvested your plants. You can sell them now!",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
   };
 
   const sellPlants = () => {
@@ -146,8 +140,8 @@ const Index = () => {
           {farmGrid.map((cell, index) => (
             <Box key={index} p={5} borderWidth="1px" borderRadius="lg" onClick={() => plantSeeds(index)}>
               {cell.state === "empty" && <Text>Empty</Text>}
-              {cell.state === "seeded" && <Icon as={FaSeedling} />}
-              {cell.state === "growing" && <Icon as={FaSeedling} />}
+              {cell.state === "seeded" && <Box bg="lightgreen" p={5} borderWidth="1px" borderRadius="lg" />}
+              {cell.state === "growing" && <Box bg="green" p={5} borderWidth="1px" borderRadius="lg" />}
               {cell.state === "mature" && <Image src="https://images.unsplash.com/photo-1700737503382-0877e9b441f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxoYXJ2ZXN0ZWQlMjBwbGFudHN8ZW58MHx8fHwxNzE1NTI5MzYwfDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Harvested Plants" boxSize="50px" />}
             </Box>
           ))}
