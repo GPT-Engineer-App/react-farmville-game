@@ -7,6 +7,7 @@ const Index = () => {
   const [seeds, setSeeds] = useState(0);
   const [plants, setPlants] = useState(0);
   const [farmGrid, setFarmGrid] = useState(Array(100).fill({ state: "empty" }));
+  const [mode, setMode] = useState("planting");
   const toast = useToast();
 
   // Removed unused useEffect block
@@ -33,26 +34,61 @@ const Index = () => {
     }
   };
 
-  const plantSeeds = (index) => {
-    if (seeds > 0 && farmGrid[index].state === "empty") {
-      setSeeds(seeds - 1);
-      const newGrid = [...farmGrid];
-      newGrid[index] = { state: "seeded" };
-      setFarmGrid(newGrid);
-      toast({
-        title: "Seeds planted!",
-        description: "Your seeds have been planted. Remember to water them!",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-      });
-    } else {
-      toast({
-        title: "No seeds to plant!",
-        status: "error",
-        duration: 2000,
-        isClosable: true,
-      });
+  const handleGridClick = (index) => {
+    switch (mode) {
+      case "planting":
+        if (seeds > 0 && farmGrid[index].state === "empty") {
+          setSeeds(seeds - 1);
+          const newGrid = [...farmGrid];
+          newGrid[index] = { state: "seeded" };
+          setFarmGrid(newGrid);
+          toast({
+            title: "Seeds planted!",
+            description: "Your seeds have been planted. Remember to water them!",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            title: "No seeds to plant!",
+            status: "error",
+            duration: 2000,
+            isClosable: true,
+          });
+        }
+        break;
+      case "watering":
+        if (farmGrid[index].state === "seeded") {
+          const newGrid = [...farmGrid];
+          newGrid[index] = { ...farmGrid[index], state: "growing" };
+          setFarmGrid(newGrid);
+          toast({
+            title: "Plant watered!",
+            description: "Your plant has been watered. It's growing!",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          });
+        }
+        break;
+      case "harvesting":
+        if (farmGrid[index].state === "mature") {
+          const newGrid = [...farmGrid];
+          newGrid[index] = { ...farmGrid[index], state: "empty" };
+          setFarmGrid(newGrid);
+          setPlants(plants + 1);
+          toast({
+            title: "Plant harvested!",
+            description: "Your plant has been harvested!",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          });
+        }
+        break;
+      default:
+        break;
     }
   };
 
@@ -123,7 +159,7 @@ const Index = () => {
           <Button leftIcon={<FaSeedling />} colorScheme="green" onClick={buySeeds}>
             Buy Seeds ($10)
           </Button>
-          <Button leftIcon={<FaHandHoldingWater />} colorScheme="blue" onClick={() => plantSeeds()} ml={2}>
+          <Button leftIcon={<FaHandHoldingWater />} colorScheme="blue" onClick={() => setMode("planting")} ml={2}>
             Plant Seeds
           </Button>
           <Button leftIcon={<FaTint />} colorScheme="teal" onClick={waterPlants} ml={2}>
@@ -136,9 +172,20 @@ const Index = () => {
             Sell Plants
           </Button>
         </Box>
+        <Box>
+          <Button colorScheme="green" onClick={() => setMode("planting")}>
+            Planting Mode
+          </Button>
+          <Button colorScheme="blue" onClick={() => setMode("watering")} ml={2}>
+            Watering Mode
+          </Button>
+          <Button colorScheme="orange" onClick={() => setMode("harvesting")} ml={2}>
+            Harvesting Mode
+          </Button>
+        </Box>
         <SimpleGrid columns={10} spacing={2}>
           {farmGrid.map((cell, index) => (
-            <Box key={index} p={5} borderWidth="1px" borderRadius="lg" onClick={() => plantSeeds(index)}>
+            <Box key={index} p={5} borderWidth="1px" borderRadius="lg" onClick={() => handleGridClick(index)}>
               {cell.state === "empty" && <Text>Empty</Text>}
               {cell.state === "seeded" && <Box bg="lightgreen" p={5} borderWidth="1px" borderRadius="lg" />}
               {cell.state === "growing" && <Box bg="green" p={5} borderWidth="1px" borderRadius="lg" />}
