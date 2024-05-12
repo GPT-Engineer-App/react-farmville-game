@@ -202,7 +202,12 @@ const Index = () => {
               {cell.state === "empty" && <Box bg="#8B4513" p={2} borderWidth="1px" borderRadius="lg" />}
               {cell.state === "seeded" && <Box bg="lightgreen" p={2} borderWidth="1px" borderRadius="lg" />}
               {cell.state === "growing" && <Box bg="green" p={2} borderWidth="1px" borderRadius="lg" />}
-              {cell.state === "mature" && <Image src="https://images.unsplash.com/photo-1700737503382-0877e9b441f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxoYXJ2ZXN0ZWQlMjBwbGFudHN8ZW58MHx8fHwxNzE1NTI5MzYwfDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Harvested Plants" boxSize="30px" />}
+              {cell.state === "mature" && (
+                <Box bg="gold" p={2} borderWidth="1px" borderRadius="lg">
+                  <Image src="https://images.unsplash.com/photo-1700737503382-0877e9b441f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxoYXJ2ZXN0ZWQlMjBwbGFudHN8ZW58MHx8fHwxNzE1NTI5MzYwfDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Harvested Plants" boxSize="30px" />
+                  <Icon as={FaHandHoldingWater} color="white" />
+                </Box>
+              )}
             </Box>
           ))}
         </SimpleGrid>
