@@ -135,7 +135,7 @@ const Index = () => {
           <Button leftIcon={<FaSeedling />} colorScheme="green" onClick={buySeeds}>
             Buy Seeds ($10)
           </Button>
-          <Button leftIcon={<FaHandHoldingWater />} colorScheme="blue" onClick={plantSeeds} ml={2}>
+          <Button leftIcon={<FaHandHoldingWater />} colorScheme="blue" onClick={() => plantSeeds()} ml={2}>
             Plant Seeds
           </Button>
           <Button leftIcon={<FaTint />} colorScheme="teal" onClick={waterPlants} ml={2}>
@@ -150,7 +150,7 @@ const Index = () => {
         </Box>
         <SimpleGrid columns={10} spacing={2}>
           {farmGrid.map((cell, index) => (
-            <Box key={index} p={5} borderWidth="1px" borderRadius="lg">
+            <Box key={index} p={5} borderWidth="1px" borderRadius="lg" onClick={() => plantSeeds(index)}>
               {cell.state === "empty" && <Text>Empty</Text>}
               {cell.state === "seeded" && <Icon as={FaSeedling} />}
               {cell.state === "growing" && <Icon as={FaSeedling} />}
