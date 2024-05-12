@@ -75,7 +75,7 @@ const Index = () => {
       case "harvesting":
         if (farmGrid[index].state === "mature") {
           const newGrid = [...farmGrid];
-          newGrid[index] = { ...farmGrid[index], state: "empty" };
+          newGrid[index] = { state: "empty" };
           setFarmGrid(newGrid);
           setPlants(plants + 1);
           toast({
@@ -158,15 +158,6 @@ const Index = () => {
         <Box>
           <Button leftIcon={<FaSeedling />} colorScheme="green" onClick={buySeeds}>
             Buy Seeds ($10)
-          </Button>
-          <Button leftIcon={<FaHandHoldingWater />} colorScheme="blue" onClick={() => setMode("planting")} ml={2}>
-            Plant Seeds
-          </Button>
-          <Button leftIcon={<FaTint />} colorScheme="teal" onClick={waterPlants} ml={2}>
-            Water Plants
-          </Button>
-          <Button leftIcon={<FaDollarSign />} colorScheme="yellow" onClick={harvestPlants} ml={2}>
-            Harvest Plants
           </Button>
           <Button leftIcon={<FaDollarSign />} colorScheme="orange" onClick={sellPlants} ml={2}>
             Sell Plants
