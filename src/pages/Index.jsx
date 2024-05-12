@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Button, VStack, Text, Box, Image, useToast, SimpleGrid, Icon } from "@chakra-ui/react";
+import { Container, Button, VStack, Text, Box, Image, useToast, SimpleGrid, Icon, HStack } from "@chakra-ui/react";
 import { FaSeedling, FaTint, FaDollarSign, FaHandHoldingWater } from "react-icons/fa";
 
 const Index = () => {
@@ -154,30 +154,33 @@ const Index = () => {
 
   return (
     <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <VStack spacing={4}>
-        <Text fontSize="2xl">Welcome to Saverville</Text>
-        <Text>Money: ${money}</Text>
-        <Text>Seeds: {seeds}</Text>
-        <Text>Plants: {plants}</Text>
-        <Box>
-          <Button leftIcon={<FaSeedling />} colorScheme="green" onClick={buySeeds}>
-            Buy Seeds ($10)
-          </Button>
-          <Button leftIcon={<FaDollarSign />} colorScheme="orange" onClick={sellPlants} ml={2}>
-            Sell Plants
-          </Button>
-        </Box>
-        <Box>
-          <Button colorScheme="green" onClick={() => setMode("planting")}>
-            Planting Mode
-          </Button>
-          <Button colorScheme="blue" onClick={() => setMode("watering")} ml={2}>
-            Watering Mode
-          </Button>
-          <Button colorScheme="orange" onClick={() => setMode("harvesting")} ml={2}>
-            Harvesting Mode
-          </Button>
-        </Box>
+      <Box w="full" p={4} bg="blue.500" color="white">
+        <Text fontSize="3xl" textAlign="center">
+          Saverville Farm
+        </Text>
+      </Box>
+      <VStack spacing={4} w="full">
+        <HStack justifyContent="space-between" w="full" p={4}>
+          <VStack align="start">
+            <Button colorScheme="green" onClick={() => setMode("planting")}>
+              Planting Mode
+            </Button>
+            <Button colorScheme="blue" onClick={() => setMode("watering")} ml={2}>
+              Watering Mode
+            </Button>
+            <Button colorScheme="orange" onClick={() => setMode("harvesting")} ml={2}>
+              Harvesting Mode
+            </Button>
+          </VStack>
+          <VStack align="end">
+            <Button leftIcon={<FaSeedling />} colorScheme="green" onClick={buySeeds}>
+              Buy Seeds ($10)
+            </Button>
+            <Button leftIcon={<FaDollarSign />} colorScheme="orange" onClick={sellPlants}>
+              Sell Plants
+            </Button>
+          </VStack>
+        </HStack>
         <Text fontSize="lg" mt={4}>
           Current Mode: {mode}
         </Text>
