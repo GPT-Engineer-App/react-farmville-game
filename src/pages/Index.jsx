@@ -40,7 +40,7 @@ const Index = () => {
         if (seeds > 0 && farmGrid[index].state === "empty") {
           setSeeds(seeds - 1);
           const newGrid = [...farmGrid];
-          newGrid[index] = { state: "seeded" };
+          newGrid[index] = { state: "seeded", id: Date.now() };
           setFarmGrid(newGrid);
           toast({
             title: "Seeds planted!",
@@ -72,21 +72,33 @@ const Index = () => {
           });
 
           setTimeout(() => {
-            const updatedGrid = [...newGrid];
-            updatedGrid[index] = { ...updatedGrid[index], state: "seedling" };
-            setFarmGrid(updatedGrid);
+            setFarmGrid((prevGrid) => {
+              const updatedGrid = [...prevGrid];
+              if (updatedGrid[index].id === newGrid[index].id) {
+                updatedGrid[index] = { ...updatedGrid[index], state: "seedling" };
+              }
+              return updatedGrid;
+            });
           }, 3000);
 
           setTimeout(() => {
-            const updatedGrid = [...newGrid];
-            updatedGrid[index] = { ...updatedGrid[index], state: "growing" };
-            setFarmGrid(updatedGrid);
+            setFarmGrid((prevGrid) => {
+              const updatedGrid = [...prevGrid];
+              if (updatedGrid[index].id === newGrid[index].id) {
+                updatedGrid[index] = { ...updatedGrid[index], state: "growing" };
+              }
+              return updatedGrid;
+            });
           }, 6000);
 
           setTimeout(() => {
-            const updatedGrid = [...newGrid];
-            updatedGrid[index] = { ...updatedGrid[index], state: "mature" };
-            setFarmGrid(updatedGrid);
+            setFarmGrid((prevGrid) => {
+              const updatedGrid = [...prevGrid];
+              if (updatedGrid[index].id === newGrid[index].id) {
+                updatedGrid[index] = { ...updatedGrid[index], state: "mature" };
+              }
+              return updatedGrid;
+            });
           }, 9000);
         }
         break;
