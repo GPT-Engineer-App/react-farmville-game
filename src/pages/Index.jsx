@@ -227,14 +227,14 @@ const Index = () => {
         <Box flex="1">
           <Image src={mode === "planting" ? "/planting.png" : mode === "watering" ? "/watering.png" : "/harvesting.png"} alt={`${mode} mode`} boxSize="100%" />
         </Box>
-        <SimpleGrid columns={10} spacing={1} templateColumns="repeat(10, 1fr)" minChildWidth="20px" flex="2">
+        <SimpleGrid columns={10} spacing={1} templateColumns="repeat(10, 1fr)" flex="2">
           {farmGrid.map((cell, index) => (
-            <Box key={index} p={2} borderWidth="1px" borderRadius="lg" bg="#8B4513" display="flex" alignItems="center" justifyContent="center" onClick={() => handleGridClick(index)}>
-              {cell.state === "seeded" && <Box bg="lightgreen" p={2} borderWidth="1px" borderRadius="lg" />}
-              {cell.state === "germination" && <Image src="/germination.png" alt="Germination" boxSize="30px" />}
-              {cell.state === "seedling" && <Image src="/seedling.png" alt="Seedling" boxSize="30px" />}
-              {cell.state === "growing" && <Image src="/growing.png" alt="Growing" boxSize="30px" />}
-              {cell.state === "mature" && <Image src="/harvest.png" alt="Harvest" boxSize="30px" />}
+            <Box key={index} w="50px" h="50px" borderWidth="1px" borderRadius="lg" bg="#8B4513" display="flex" alignItems="center" justifyContent="center" onClick={() => handleGridClick(index)}>
+              {cell.state === "seeded" && <Box w="100%" h="100%" />}
+              {cell.state === "germination" && <Image src="/germination.png" alt="Germination" boxSize="100%" />}
+              {cell.state === "seedling" && <Image src="/seedling.png" alt="Seedling" boxSize="100%" />}
+              {cell.state === "growing" && <Image src="/growing.png" alt="Growing" boxSize="100%" />}
+              {cell.state === "mature" && <Image src="/harvest.png" alt="Harvest" boxSize="100%" />}
             </Box>
           ))}
         </SimpleGrid>
