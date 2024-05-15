@@ -227,7 +227,7 @@ const Index = () => {
         <Box flex="1">
           <Image src={mode === "planting" ? "/planting.png" : mode === "watering" ? "/watering.png" : "/harvesting.png"} alt={`${mode} mode`} boxSize="100%" />
         </Box>
-        <SimpleGrid columns={10} spacing={1} templateColumns="repeat(10, 1fr)" flex="2">
+        <SimpleGrid columns={10} spacing={4} templateColumns="repeat(10, 1fr)" flex="2">
           {farmGrid.map((cell, index) => (
             <Box key={index} w="50px" h="50px" borderWidth="1px" borderRadius="lg" bg="#8B4513" display="flex" alignItems="center" justifyContent="center" onClick={() => handleGridClick(index)}>
               {cell.state === "seeded" && <Box w="100%" h="100%" />}
