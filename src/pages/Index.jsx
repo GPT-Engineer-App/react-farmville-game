@@ -61,15 +61,33 @@ const Index = () => {
       case "watering":
         if (farmGrid[index].state === "seeded") {
           const newGrid = [...farmGrid];
-          newGrid[index] = { ...farmGrid[index], state: "growing" };
+          newGrid[index] = { ...farmGrid[index], state: "germination" };
           setFarmGrid(newGrid);
           toast({
             title: "Plant watered!",
-            description: "Your plant has been watered. It's growing!",
+            description: "Your plant has been watered. It's germinating!",
             status: "success",
             duration: 2000,
             isClosable: true,
           });
+
+          setTimeout(() => {
+            const updatedGrid = [...newGrid];
+            updatedGrid[index] = { ...updatedGrid[index], state: "seedling" };
+            setFarmGrid(updatedGrid);
+          }, 3000);
+
+          setTimeout(() => {
+            const updatedGrid = [...newGrid];
+            updatedGrid[index] = { ...updatedGrid[index], state: "growing" };
+            setFarmGrid(updatedGrid);
+          }, 6000);
+
+          setTimeout(() => {
+            const updatedGrid = [...newGrid];
+            updatedGrid[index] = { ...updatedGrid[index], state: "mature" };
+            setFarmGrid(updatedGrid);
+          }, 9000);
         }
         break;
       case "harvesting":
@@ -202,13 +220,10 @@ const Index = () => {
             <Box key={index} p={2} borderWidth="1px" borderRadius="lg" onClick={() => handleGridClick(index)}>
               {cell.state === "empty" && <Box bg="#8B4513" p={2} borderWidth="1px" borderRadius="lg" />}
               {cell.state === "seeded" && <Box bg="lightgreen" p={2} borderWidth="1px" borderRadius="lg" />}
-              {cell.state === "growing" && <Box bg="green" p={2} borderWidth="1px" borderRadius="lg" />}
-              {cell.state === "mature" && (
-                <Box bg="gold" p={2} borderWidth="1px" borderRadius="lg">
-                  <Image src="https://images.unsplash.com/photo-1700737503382-0877e9b441f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxoYXJ2ZXN0ZWQlMjBwbGFudHN8ZW58MHx8fHwxNzE1NTI5MzYwfDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Harvested Plants" boxSize="30px" />
-                  <Icon as={FaHandHoldingWater} color="white" />
-                </Box>
-              )}
+              {cell.state === "germination" && <Image src="/germination.png" alt="Germination" boxSize="30px" />}
+              {cell.state === "seedling" && <Image src="/seedling.png" alt="Seedling" boxSize="30px" />}
+              {cell.state === "growing" && <Image src="/growing.png" alt="Growing" boxSize="30px" />}
+              {cell.state === "mature" && <Image src="/harvest.png" alt="Harvest" boxSize="30px" />}
             </Box>
           ))}
         </SimpleGrid>
