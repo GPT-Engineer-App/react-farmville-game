@@ -229,8 +229,7 @@ const Index = () => {
         </Box>
         <SimpleGrid columns={10} spacing={1} templateColumns="repeat(10, 1fr)" minChildWidth="20px" flex="2">
           {farmGrid.map((cell, index) => (
-            <Box key={index} p={2} borderWidth="1px" borderRadius="lg" onClick={() => handleGridClick(index)}>
-              {cell.state === "empty" && <Box bg="#8B4513" p={2} borderWidth="1px" borderRadius="lg" />}
+            <Box key={index} p={2} borderWidth="1px" borderRadius="lg" bg="#8B4513" display="flex" alignItems="center" justifyContent="center" onClick={() => handleGridClick(index)}>
               {cell.state === "seeded" && <Box bg="lightgreen" p={2} borderWidth="1px" borderRadius="lg" />}
               {cell.state === "germination" && <Image src="/germination.png" alt="Germination" boxSize="30px" />}
               {cell.state === "seedling" && <Image src="/seedling.png" alt="Seedling" boxSize="30px" />}
