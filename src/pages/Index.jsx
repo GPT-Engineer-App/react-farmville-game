@@ -208,17 +208,13 @@ const Index = () => {
           </Button>
         </HStack>
         <HStack spacing={4}>
-          <Box bg="lightgreen" p={2} borderRadius="md">
-            Seeds{" "}
-            <Badge ml={1} colorScheme="yellow">
-              {seeds}
-            </Badge>
+          <Box bg="lightgreen" p={2} borderRadius="md" display="flex" alignItems="center">
+            <Image src="/germination.png" alt="Seeds" boxSize="20px" />
+            <Text ml={2}>x {seeds}</Text>
           </Box>
-          <Box bg="darkgreen" p={2} borderRadius="md">
-            Plants{" "}
-            <Badge ml={1} colorScheme="yellow">
-              {plants}
-            </Badge>
+          <Box bg="darkgreen" p={2} borderRadius="md" display="flex" alignItems="center">
+            <Image src="/harvest.png" alt="Plants" boxSize="20px" />
+            <Text ml={2}>x {plants}</Text>
           </Box>
         </HStack>
       </HStack>
