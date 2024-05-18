@@ -40,7 +40,7 @@ const Index = () => {
         if (seeds > 0 && farmGrid[index].state === "empty") {
           setSeeds(seeds - 1);
           const newGrid = [...farmGrid];
-          newGrid[index] = { state: "seeded", id: Date.now() };
+          newGrid[index] = { state: "germination", id: Date.now() };
           setFarmGrid(newGrid);
           toast({
             title: "Seeds planted!",
