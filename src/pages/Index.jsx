@@ -40,7 +40,7 @@ const Index = () => {
         if (seeds > 0 && farmGrid[index].state === "empty") {
           setSeeds(seeds - 1);
           const newGrid = [...farmGrid];
-          newGrid[index] = { state: "seeded" };
+          newGrid[index] = { state: "seeded", id: Date.now() };
           setFarmGrid(newGrid);
           toast({
             title: "Seeds planted!",
@@ -72,21 +72,33 @@ const Index = () => {
           });
 
           setTimeout(() => {
-            const updatedGrid = [...newGrid];
-            updatedGrid[index] = { ...updatedGrid[index], state: "seedling" };
-            setFarmGrid(updatedGrid);
+            setFarmGrid((prevGrid) => {
+              const updatedGrid = [...prevGrid];
+              if (updatedGrid[index].id === newGrid[index].id) {
+                updatedGrid[index] = { ...updatedGrid[index], state: "seedling" };
+              }
+              return updatedGrid;
+            });
           }, 3000);
 
           setTimeout(() => {
-            const updatedGrid = [...newGrid];
-            updatedGrid[index] = { ...updatedGrid[index], state: "growing" };
-            setFarmGrid(updatedGrid);
+            setFarmGrid((prevGrid) => {
+              const updatedGrid = [...prevGrid];
+              if (updatedGrid[index].id === newGrid[index].id) {
+                updatedGrid[index] = { ...updatedGrid[index], state: "growing" };
+              }
+              return updatedGrid;
+            });
           }, 6000);
 
           setTimeout(() => {
-            const updatedGrid = [...newGrid];
-            updatedGrid[index] = { ...updatedGrid[index], state: "mature" };
-            setFarmGrid(updatedGrid);
+            setFarmGrid((prevGrid) => {
+              const updatedGrid = [...prevGrid];
+              if (updatedGrid[index].id === newGrid[index].id) {
+                updatedGrid[index] = { ...updatedGrid[index], state: "mature" };
+              }
+              return updatedGrid;
+            });
           }, 9000);
         }
         break;
@@ -196,17 +208,13 @@ const Index = () => {
           </Button>
         </HStack>
         <HStack spacing={4}>
-          <Box bg="lightgreen" p={2} borderRadius="md">
-            Seeds{" "}
-            <Badge ml={1} colorScheme="yellow">
-              {seeds}
-            </Badge>
+          <Box p={2} borderRadius="md" display="flex" alignItems="center">
+            <Image src="/germination.png" alt="Seeds" boxSize="30px" />
+            <Text ml={2}>x {seeds}</Text>
           </Box>
-          <Box bg="darkgreen" p={2} borderRadius="md">
-            Plants{" "}
-            <Badge ml={1} colorScheme="yellow">
-              {plants}
-            </Badge>
+          <Box p={2} borderRadius="md" display="flex" alignItems="center">
+            <Image src="/harvest.png" alt="Plants" boxSize="30px" />
+            <Text ml={2}>x {plants}</Text>
           </Box>
         </HStack>
       </HStack>
@@ -215,15 +223,14 @@ const Index = () => {
         <Box flex="1">
           <Image src={mode === "planting" ? "/planting.png" : mode === "watering" ? "/watering.png" : "/harvesting.png"} alt={`${mode} mode`} boxSize="100%" />
         </Box>
-        <SimpleGrid columns={10} spacing={1} templateColumns="repeat(10, 1fr)" minChildWidth="20px" flex="2">
+        <SimpleGrid columns={10} spacing={4} flex="2">
           {farmGrid.map((cell, index) => (
-            <Box key={index} p={2} borderWidth="1px" borderRadius="lg" onClick={() => handleGridClick(index)}>
-              {cell.state === "empty" && <Box bg="#8B4513" p={2} borderWidth="1px" borderRadius="lg" />}
-              {cell.state === "seeded" && <Box bg="lightgreen" p={2} borderWidth="1px" borderRadius="lg" />}
-              {cell.state === "germination" && <Image src="/germination.png" alt="Germination" boxSize="30px" />}
-              {cell.state === "seedling" && <Image src="/seedling.png" alt="Seedling" boxSize="30px" />}
-              {cell.state === "growing" && <Image src="/growing.png" alt="Growing" boxSize="30px" />}
-              {cell.state === "mature" && <Image src="/harvest.png" alt="Harvest" boxSize="30px" />}
+            <Box key={index} w="50px" h="50px" borderWidth="2px" borderColor="#5D3A00" borderRadius="lg" bg="#8B4513" display="flex" alignItems="center" justifyContent="center" onClick={() => handleGridClick(index)}>
+              {cell.state === "seeded" && <Box w="100%" h="100%" />}
+              {cell.state === "germination" && <Image src="/germination.png" alt="Germination" boxSize="100%" />}
+              {cell.state === "seedling" && <Image src="/seedling.png" alt="Seedling" boxSize="100%" />}
+              {cell.state === "growing" && <Image src="/growing.png" alt="Growing" boxSize="100%" />}
+              {cell.state === "mature" && <Image src="/harvest.png" alt="Harvest" boxSize="100%" />}
             </Box>
           ))}
         </SimpleGrid>
