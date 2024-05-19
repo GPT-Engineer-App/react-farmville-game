@@ -184,7 +184,7 @@ const Index = () => {
       <Box p={4} bg="blue.500" color="white" display="flex" justifyContent="space-between">
         <Text fontSize="3xl">Saverville Farm</Text>
         <HStack spacing={4}>
-          <Button colorScheme="yellow" onClick={buySeeds}>
+          <Button colorScheme="green" onClick={buySeeds}>
             Buy Seeds
           </Button>
           <Button colorScheme="red" onClick={sellPlants}>
