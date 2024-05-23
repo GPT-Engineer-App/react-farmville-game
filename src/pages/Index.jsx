@@ -40,7 +40,7 @@ const Index = () => {
         if (seeds > 0 && farmGrid[index].state === "empty") {
           setSeeds(seeds - 1);
           const newGrid = [...farmGrid];
-          newGrid[index] = { state: "seeded", id: Date.now() };
+          newGrid[index] = { state: "seeded", id: Date.now(), image: "/seed.png" };
           setFarmGrid(newGrid);
           toast({
             title: "Seeds planted!",
@@ -226,7 +226,7 @@ const Index = () => {
         <SimpleGrid columns={10} spacing={4} flex="2">
           {farmGrid.map((cell, index) => (
             <Box key={index} w="50px" h="50px" borderWidth="2px" borderColor="#5D3A00" borderRadius="lg" bg="#8B4513" display="flex" alignItems="center" justifyContent="center" onClick={() => handleGridClick(index)}>
-              {cell.state === "seeded" && <Box w="100%" h="100%" />}
+              {cell.state === "seeded" && <Image src={cell.image} alt="Seed" boxSize="100%" />}
               {cell.state === "germination" && <Image src="/germination.png" alt="Germination" boxSize="100%" />}
               {cell.state === "seedling" && <Image src="/seedling.png" alt="Seedling" boxSize="100%" />}
               {cell.state === "growing" && <Image src="/growing.png" alt="Growing" boxSize="100%" />}
